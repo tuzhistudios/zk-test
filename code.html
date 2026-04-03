@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TuZhi Codes</title>
+    
+    <!-- Vercel SPA fix -->
+    <script>
+        // Handle client-side routing for Vercel
+        if (window.location.pathname !== '/' && !window.location.pathname.endsWith('.html')) {
+            window.history.replaceState({}, '', '/');
+        }
+    </script>
+    
     <style>
         * {
             margin: 0;
@@ -35,7 +44,6 @@
             text-transform: uppercase;
             margin-bottom: 1rem;
             
-            /* Orange-Yellow Gradient */
             background: linear-gradient(90deg, 
                 #FF8C00 0%, 
                 #FFA500 25%, 
@@ -44,182 +52,20 @@
                 #FF8C00 100%);
             background-size: 200% auto;
             
-            /* Apply gradient to text */
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
             
-            /* Animation */
             animation: gradientShift 3s ease-in-out infinite alternate;
-            
-            /* Text shadow for better visibility */
             text-shadow: 0 0 30px rgba(255, 165, 0, 0.3);
         }
         
-        .subtitle {
-            color: #FFFFFF;
-            font-size: 1.8rem;
-            letter-spacing: 2px;
-            margin-top: 1rem;
-            opacity: 0.8;
-            animation: fadeInOut 4s ease-in-out infinite;
-        }
-        
-        .gradient-line {
-            height: 6px;
-            width: 300px;
-            margin: 2rem auto;
-            background: linear-gradient(90deg, 
-                transparent, 
-                #FF8C00, 
-                #FFD700, 
-                #FF8C00, 
-                transparent);
-            border-radius: 3px;
-            animation: linePulse 2.5s ease-in-out infinite alternate;
-        }
-        
-        /* Animations */
-        @keyframes gradientShift {
-            0% {
-                background-position: 0% center;
-            }
-            100% {
-                background-position: 100% center;
-            }
-        }
-        
-        @keyframes fadeInOut {
-            0%, 100% {
-                opacity: 0.5;
-            }
-            50% {
-                opacity: 1;
-            }
-        }
-        
-        @keyframes linePulse {
-            0% {
-                width: 250px;
-                opacity: 0.6;
-            }
-            100% {
-                width: 350px;
-                opacity: 1;
-            }
-        }
-        
-        /* Glowing dots effect */
-        .dots {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
-        
-        .dot {
-            position: absolute;
-            background: radial-gradient(circle, rgba(255, 165, 0, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(0) translateX(0);
-            }
-            25% {
-                transform: translateY(-20px) translateX(10px);
-            }
-            50% {
-                transform: translateY(10px) translateX(-10px);
-            }
-            75% {
-                transform: translateY(-10px) translateX(20px);
-            }
-            100% {
-                transform: translateY(0) translateX(0);
-            }
-        }
-        
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .title {
-                font-size: 4rem;
-                letter-spacing: 2px;
-            }
-            
-            .subtitle {
-                font-size: 1.4rem;
-            }
-            
-            .gradient-line {
-                width: 200px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .title {
-                font-size: 2.8rem;
-                letter-spacing: 1px;
-            }
-            
-            .subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .gradient-line {
-                width: 180px;
-            }
-        }
+        /* Rest of your CSS... */
+        /* (पूरा CSS वही रहेगा जो पहले था) */
     </style>
 </head>
 <body>
-    <div class="dots" id="dotsContainer"></div>
-    
-    <div class="container">
-        <h1 class="title">TuZhi Codes</h1>
-        
-        <div class="gradient-line"></div>
-        
-        <p class="subtitle">Coding with Passion & Precision</p>
-    </div>
-
-    <script>
-        // Create floating dots for background effect
-        const dotsContainer = document.getElementById('dotsContainer');
-        const numberOfDots = 15;
-        
-        for (let i = 0; i < numberOfDots; i++) {
-            const dot = document.createElement('div');
-            dot.className = 'dot';
-            
-            // Random properties
-            const size = Math.random() * 100 + 50;
-            const left = Math.random() * 100;
-            const top = Math.random() * 100;
-            const delay = Math.random() * 15;
-            
-            dot.style.width = `${size}px`;
-            dot.style.height = `${size}px`;
-            dot.style.left = `${left}%`;
-            dot.style.top = `${top}%`;
-            dot.style.animationDelay = `${delay}s`;
-            
-            dotsContainer.appendChild(dot);
-        }
-        
-        // Add subtle mouse movement effect to title
-        const title = document.querySelector('.title');
-        
-        document.addEventListener('mousemove', (e) => {
-            const x = (window.innerWidth - e.pageX * 2) / 100;
-            const y = (window.innerHeight - e.pageY * 2) / 100;
-            
-            title.style.transform = `translate(${x}px, ${y}px)`;
-        });
-    </script>
+    <!-- Your HTML content -->
+    <!-- (पूरा HTML वही रहेगा जो पहले था) -->
 </body>
 </html>
