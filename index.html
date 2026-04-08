@@ -3,220 +3,180 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZarKos AI – I Do + System</title>
+  <title>Advanced Profile Website</title>
   <style>
-    :root {
-      --primary: #00f5ff;
-      --accent: #ff00ff;
-      --bg: #0a0a0a;
-      --text: #fff;
-      --dark: #111;
-    }
-
-    * {
+    body {
+      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-      transition: background 0.4s ease;
-    }
-
-    .sky {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, var(--primary) 0%, var(--bg) 70%);
-      animation: pulse 8s infinite alternate;
-    }
-
-    @keyframes pulse {
-      0% { filter: brightness(1); }
-      100% { filter: brightness(1.4); }
-    }
-
-    .particle {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      background: var(--accent);
-      border-radius: 50%;
-      animation: float 15s infinite linear;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(100vh) scale(0); opacity: 0; }
-      10% { opacity: 1; }
-      100% { transform: translateY(-100vh) scale(1); opacity: 0; }
-    }
-
-    header {
-      position: relative;
-      display: flex;
-      justify-content: space-between;
-      padding: 1.2rem 2rem;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 800;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      -webkit-background-clip: text;
-      color: transparent;
-      animation: glow 2s infinite alternate;
-    }
-
-    @keyframes glow {
-      from { text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary); }
-      to { text-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent); }
-    }
-
-    .lang-toggle {
-      cursor: pointer;
-      background: transparent;
-      border: 1px solid var(--accent);
-      color: var(--text);
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      transition: 0.3s;
-    }
-
-    .lang-toggle:hover {
-      background: var(--accent);
-    }
-
-    main {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 80vh;
-      padding: 0 1rem;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      animation: slideIn 1s ease-out;
-    }
-
-    p {
-      font-size: 1.2rem;
-      max-width: 700px;
-      margin-bottom: 2rem;
+      background-color: #f4f4f9;
+      color: #333;
       line-height: 1.6;
-      animation: fadeUp 1.2s ease-out;
     }
-
-    .cta {
-      display: inline-block;
-      padding: 0.9rem 2rem;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      border: none;
-      border-radius: 30px;
+    header {
+      background-color: #2c3e50;
       color: #fff;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-
-    .cta:hover {
-      transform: scale(1.1);
-    }
-
-    @keyframes slideIn {
-      from { transform: translateY(-50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    @keyframes fadeUp {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    .footer {
-      padding: 1rem;
+      padding: 20px 0;
       text-align: center;
-      font-size: 0.8rem;
-      color: #aaa;
     }
-
-    @media (max-width: 600px) {
-      h1 { font-size: 2.5rem; }
-      p { font-size: 1rem; }
+    nav {
+      background-color: #34495e;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #ecf0f1;
+    }
+    .section {
+      padding: 40px 20px;
+      margin: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .section h2 {
+      color: #2c3e50;
+    }
+    .skills, .projects {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .skill, .project {
+      background-color: #ecf0f1;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      width: calc(33.333% - 20px);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    }
+    .contact form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .contact input, .contact textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .contact button {
+      background-color: #2c3e50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .contact button:hover {
+      background-color: #34495e;
+    }
+    footer {
+      background-color: #2c3e50;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+    @media (max-width: 768px) {
+      .skill, .project {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="sky"></div>
-
   <header>
-    <div class="logo">ZarKos AI</div>
-    <button class="lang-toggle" id="langBtn">हिंदी</button>
+    <h1>John Doe</h1>
+    <p>Full Stack Developer</p>
   </header>
-
-  <main>
-    <h1 id="title">I Do + System</h1>
-    <p id="desc">
-      Meet ZarKos AI — an autonomous, ultra-fast assistant built by TuZhi Studio. Hindi & English ready, code-gen, design, and logic — all in one. Experience the future, now.
-    </p>
-    <button class="cta" id="ctaBtn">Get Started</button>
-  </main>
-
-  <footer class="footer">
-    © 2024 TuZhi Studio
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <section id="about" class="section">
+    <h2>About Me</h2>
+    <p>Hello! I'm a passionate full stack developer with over 5 years of experience in building scalable web applications. I love solving complex problems and creating user-friendly interfaces.</p>
+  </section>
+  <section id="skills" class="section">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div class="skill">
+        <h3>HTML5</h3>
+        <p>Expert in creating semantic and responsive web pages.</p>
+      </div>
+      <div class="skill">
+        <h3>CSS3</h3>
+        <p>Proficient in styling with CSS3 and modern CSS frameworks.</p>
+      </div>
+      <div class="skill">
+        <h3>JavaScript</h3>
+        <p>Skilled in JavaScript, including ES6+ features and frameworks like React.</p>
+      </div>
+      <div class="skill">
+        <h3>Node.js</h3>
+        <p>Experience in building server-side applications with Node.js.</p>
+      </div>
+      <div class="skill">
+        <h3>SQL</h3>
+        <p>Comfortable with SQL databases and database management systems.</p>
+      </div>
+      <div class="skill">
+        <h3>Git</h3>
+        <p>Version control with Git and collaboration with GitHub.</p>
+      </div>
+    </div>
+  </section>
+  <section id="projects" class="section">
+    <h2>Projects</h2>
+    <div class="projects">
+      <div class="project">
+        <h3>Project 1</h3>
+        <p>A description of the first project, including technologies used and key features.</p>
+      </div>
+      <div class="project">
+        <h3>Project 2</h3>
+        <p>A description of the second project, including technologies used and key features.</p>
+      </div>
+      <div class="project">
+        <h3>Project 3</h3>
+        <p>A description of the third project, including technologies used and key features.</p>
+      </div>
+    </div>
+  </section>
+  <section id="contact" class="section">
+    <h2>Contact Me</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+  <footer>
+    <p>&copy; 2023 John Doe. All rights reserved.</p>
   </footer>
-
   <script>
-    // Language toggle
-    const data = {
-      en: {
-        title: "I Do + System",
-        desc: "Meet ZarKos AI — an autonomous, ultra-fast assistant built by TuZhi Studio. Hindi & English ready, code-gen, design, and logic — all in one. Experience the future, now.",
-        cta: "Get Started"
-      },
-      hi: {
-        title: "मैं करूँ + सिस्टम",
-        desc: "ZarKos AI से मिलिए — TuZhi Studio का स्वचालित, अल्ट्रा-फास्ट असिस्टेंट। हिंदी और इंग्लिश में समर्थित, कोड-जेन, डिज़ाइन व लॉजिक — सब एक में। भविष्य अभी अनुभव करें।",
-        cta: "शुरू करें"
-      }
-    };
-
-    const langBtn = document.getElementById("langBtn");
-    const title = document.getElementById("title");
-    const desc = document.getElementById("desc");
-    const ctaBtn = document.getElementById("ctaBtn");
-    let currentLang = "en";
-
-    langBtn.addEventListener("click", () => {
-      currentLang = currentLang === "en" ? "hi" : "en";
-      title.textContent = data[currentLang].title;
-      desc.textContent = data[currentLang].desc;
-      ctaBtn.textContent = data[currentLang].cta;
-      langBtn.textContent = currentLang === "en" ? "हिंदी" : "English";
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
     });
-
-    // Animated particles
-    const particleCount = 70;
-    for (let i = 0; i < particleCount; i++) {
-      const p = document.createElement("div");
-      p.classList.add("particle");
-      p.style.left = Math.random() * 100 + "vw";
-      p.style.animationDuration = Math.random() * 10 + 5 + "s";
-      p.style.animationDelay = Math.random() * 5 + "s";
-      document.body.appendChild(p);
-    }
   </script>
 </body>
-</html>
+  </html>
