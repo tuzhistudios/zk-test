@@ -1,16 +1,84 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catch the Falling Items</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+        #game-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #basket {
+            position: absolute;
+            bottom: 10px;
+            width: 100px;
+            height: 20px;
+            background-color: #ff6347;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .item {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: #4682b4;
+            border-radius: 50%;
+        }
+    </style>
 </head>
 <body>
     <div id="game-container">
         <div id="basket"></div>
     </div>
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const gameContainer = document.getElementById('game-container');
+            const basket = document.getElementById('basket');
+            const gameWidth = gameContainer.clientWidth;
+            const basketWidth = basket.clientWidth;
+            let score = 0;
+            function createItem() {
+                const item = document.createElement('div');
+                item.classList.add('item');
+                item.style.left = Math.random() * (gameWidth - 30) + 'px';
+                item.style.top = '-30px';
+                gameContainer.appendChild(item);
+                function fall() {
+                    const itemTop = parseInt(item.style.top);
+                    if (itemTop < gameContainer.clientHeight) {
+                        item.style.top = itemTop + 2 + 'px';
+                        requestAnimationFrame(fall);
+                    } else {
+                        gameContainer.removeChild(item);
+                    }
+                }
+                fall();
+            }
+            setInterval(createItem, 1000);
+            function moveBasket(event) {
+                if (event.key === 'ArrowLeft') {
+                    const basketLeft = parseInt(basket.style.left) || gameWidth / 2 - basketWidth / 2;
+                    if (basketLeft > 0) {
+                        basket.style.left = basketLeft - 10 + 'px';
+                    }
+                } else if (event.key === 'ArrowRight') {
+                    const basketLeft = parseInt(basket.style.left) || gameWidth / 2 - basketWidth / 2;
+                    if (basketLeft < gameWidth - basketWidth) {
+                        basket.style.left = basketLeft + 10 + 'px';
+                    }
+                }
+            }
+            document.addEventListener('keydown', moveBasket);
+        });
+    </script>
 </body>
 </html>
