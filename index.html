@@ -2,181 +2,195 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Advanced Profile Website</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>TuZhi Codes – Full-Stack Dev & YouTuber</title>
+
+  <!-- Google fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f9;
-      color: #333;
-      line-height: 1.6;
+    :root{
+      --primary:#7c3aed;
+      --primary-light:#a855f7;
+      --dark:#0f172a;
+      --light:#f8fafc;
+      --muted:#64748b;
+      --surface:#1e293b;
+      --radius:12px;
     }
-    header {
-      background-color: #2c3e50;
-      color: #fff;
-      padding: 20px 0;
-      text-align: center;
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:Inter,system-ui,sans-serif;
+      background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);
+      color:var(--light);
+      line-height:1.6;
     }
-    nav {
-      background-color: #34495e;
-      padding: 10px;
-      text-align: center;
+    header{
+      text-align:center;
+      padding:120px 20px 80px;
+      background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%237c3aed" fill-opacity="0.2" d="M0,96L60,128C120,160,240,224,360,213.3C480,203,600,117,720,96C840,75,960,117,1080,138.7C1200,160,1320,160,1380,160L1440,160L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path></svg>') no-repeat bottom/cover;
     }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: bold;
+    header h1{
+      font-size:3rem;
+      font-weight:800;
+      background:linear-gradient(90deg,var(--primary-light) 0%,#ec4899 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
     }
-    nav a:hover {
-      color: #ecf0f1;
+    header p{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:1.25rem;
     }
-    .section {
-      padding: 40px 20px;
-      margin: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    nav{
+      position:fixed;top:0;left:0;width:100%;
+      background:rgba(15,23,42,.7);
+      backdrop-filter:saturate(180%) blur(12px);
+      padding:15px 40px;
+      display:flex;
+      gap:30px;
+      justify-content:center;
+      z-index:10;
     }
-    .section h2 {
-      color: #2c3e50;
+    nav a{
+      color:#cbd5e1;
+      font-weight:600;
+      text-decoration:none;
+      transition:.3s;
     }
-    .skills, .projects {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
+    nav a:hover{color:var(--primary-light)}
+    section.section{max-width:900px;margin:60px auto;padding:0 20px}
+    .cards{display:grid;gap:25px}
+    .cards{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .card{
+      background:var(--surface);
+      padding:30px;
+      border-radius:var(--radius);
+      box-shadow:0 8px 25px rgba(0,0,0,.4);
+      transition:.3s;
     }
-    .skill, .project {
-      background-color: #ecf0f1;
-      padding: 20px;
-      border-radius: 8px;
-      text-align: center;
-      width: calc(33.333% - 20px);
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    .card:hover{transform:translateY(-6px)}
+    .skills .card{
+      text-align:center;
+      background:linear-gradient(135deg,var(--primary),var(--primary-light));
     }
-    .contact form {
-      max-width: 600px;
-      margin: 0 auto;
+    .projects .card{position:relative}
+    .projects img{
+      width:100%;border-radius:var(--radius);margin-bottom:15px;
     }
-    .contact input, .contact textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ddd;
-      border-radius: 4px;
+    .projects small{color:var(--muted)}
+    .contact label{display:block;margin-bottom:6px;font-weight:500}
+    .contact input,.contact textarea{
+      width:100%;padding:14px 18px;border:none;
+      background:#334155;color:#e2e8f0;border-radius:var(--radius);
     }
-    .contact button {
-      background-color: #2c3e50;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
+    .contact button{
+      background:var(--primary);border:none;padding:14px 30px;
+      border-radius:var(--radius);color:#fff;font-weight:600;cursor:pointer;
+      margin-top:12px;transition:.3s;
     }
-    .contact button:hover {
-      background-color: #34495e;
+    .contact button:hover{filter:brightness(1.1)}
+    footer{
+      text-align:center;padding:30px 20px;color:var(--muted);
     }
-    footer {
-      background-color: #2c3e50;
-      color: #fff;
-      text-align: center;
-      padding: 10px 0;
-      position: fixed;
-      width: 100%;
-      bottom: 0;
-    }
-    @media (max-width: 768px) {
-      .skill, .project {
-        width: 100%;
-      }
-    }
+    .socials{display:flex;justify-content:center;gap:24px;margin-top:30px}
+    .socials a{color:#cbd5e1;font-size:2rem;transition:.3s}
+    .socials a:hover{color:var(--primary-light)}
   </style>
 </head>
 <body>
-  <header>
-    <h1>John Doe</h1>
-    <p>Full Stack Developer</p>
-  </header>
+
   <nav>
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
     <a href="#projects">Projects</a>
     <a href="#contact">Contact</a>
   </nav>
+
+  <!-- Hero -->
+  <header>
+    <h1>TuZhi Codes</h1>
+    <p>Full-Stack Developer • YouTuber • Open-Source Geek</p>
+  </header>
+
+  <!-- About -->
   <section id="about" class="section">
-    <h2>About Me</h2>
-    <p>Hello! I'm a passionate full stack developer with over 5 years of experience in building scalable web applications. I love solving complex problems and creating user-friendly interfaces.</p>
+    <h2 style="margin-bottom:20px">About Me</h2>
+    <p>
+      Hey, I’m TuZhi! I craft scalable web apps, create fun tutorials on <strong>YouTube</strong>, and love open source. When I’m not coding you’ll find me sipping filter-coffee and debugging life.
+    </p>
   </section>
+
+  <!-- Skills -->
   <section id="skills" class="section">
-    <h2>Skills</h2>
-    <div class="skills">
-      <div class="skill">
-        <h3>HTML5</h3>
-        <p>Expert in creating semantic and responsive web pages.</p>
-      </div>
-      <div class="skill">
-        <h3>CSS3</h3>
-        <p>Proficient in styling with CSS3 and modern CSS frameworks.</p>
-      </div>
-      <div class="skill">
-        <h3>JavaScript</h3>
-        <p>Skilled in JavaScript, including ES6+ features and frameworks like React.</p>
-      </div>
-      <div class="skill">
-        <h3>Node.js</h3>
-        <p>Experience in building server-side applications with Node.js.</p>
-      </div>
-      <div class="skill">
-        <h3>SQL</h3>
-        <p>Comfortable with SQL databases and database management systems.</p>
-      </div>
-      <div class="skill">
-        <h3>Git</h3>
-        <p>Version control with Git and collaboration with GitHub.</p>
-      </div>
+    <h2 style="margin-bottom:20px">Technologies I breathe</h2>
+    <div class="cards">
+      <div class="card"><h3>Next.js</h3></div>
+      <div class="card"><h3>TypeScript</h3></div>
+      <div class="card"><h3>Node.js</h3></div>
+      <div class="card"><h3>Tailwind CSS</h3></div>
+      <div class="card"><h3>PostgreSQL</h3></div>
+      <div class="card"><h3>Docker</h3></div>
     </div>
   </section>
+
+  <!-- Projects -->
   <section id="projects" class="section">
-    <h2>Projects</h2>
-    <div class="projects">
-      <div class="project">
-        <h3>Project 1</h3>
-        <p>A description of the first project, including technologies used and key features.</p>
+    <h2 style="margin-bottom:20px">Featured Work</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="https://via.placeholder.com/600x300/7c3aed/ffffff?text=ZarKos+AI" alt="ZarKos AI">
+        <h3>ZarKos AI</h3>
+        <p>Universal AI agent for coding, design & debugging.<br><small>Next.js, Vercel, OpenAI</small></p>
       </div>
-      <div class="project">
-        <h3>Project 2</h3>
-        <p>A description of the second project, including technologies used and key features.</p>
+      <div class="card">
+        <img src="https://via.placeholder.com/600x300/ec4899/ffffff?text=DevTube+Clone" alt="DevTube Clone">
+        <h3>DevTube Clone</h3>
+        <p>Full-stack video platform with live-streaming.<br><small>Turborepo, Prisma, WebRTC</small></p>
       </div>
-      <div class="project">
-        <h3>Project 3</h3>
-        <p>A description of the third project, including technologies used and key features.</p>
+      <div class="card">
+        <img src="https://via.placeholder.com/600x300/22c55e/ffffff?text=Portfolio+Gen" alt="Portfolio Generator">
+        <h3>Portfolio Generator</h3>
+        <p>CLI tool to spin up designer-grade portfolios.<br><small>TypeScript, Ink, Faker</small></p>
       </div>
     </div>
   </section>
+
+  <!-- Contact -->
   <section id="contact" class="section">
-    <h2>Contact Me</h2>
-    <form>
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-      <textarea placeholder="Your Message" rows="5" required></textarea>
+    <h2 style="margin-bottom:20px">Drop a hi 👋</h2>
+    <form onsubmit="event.preventDefault();alert('Thanks! I’ll reply soon.');this.reset()">
+      <label>Name</label>
+      <input type="text" required>
+      <label>Email</label>
+      <input type="email" required>
+      <label>Message</label>
+      <textarea rows="4" required></textarea>
       <button type="submit">Send Message</button>
     </form>
+
+    <!-- Social Links -->
+    <div class="socials">
+      <a href="https://youtube.com/@tuzhicodes" title="YouTube" target="_blank"><i class="ri-youtube-fill"></i></a>
+      <a href="https://github.com/tuzhicodes" title="GitHub" target="_blank"><i class="ri-github-fill"></i></a>
+      <a href="https://twitter.com/tuzhicodes" title="Twitter" target="_blank"><i class="ri-twitter-fill"></i></a>
+      <a href="https://discord.gg/ERJdY5HYgx" title="Discord" target="_blank"><i class="ri-discord-fill"></i></a>
+    </div>
   </section>
+
   <footer>
-    <p>&copy; 2023 John Doe. All rights reserved.</p>
+    <p>© 2024 TuZhi Codes – Crafted with 💜 & JavaScript</p>
   </footer>
+
   <script>
-    document.querySelectorAll('nav a').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
-      });
-    });
+    /* smooth scroll */
+    document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',e=>{
+      e.preventDefault();
+      document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+    }));
   </script>
 </body>
-  </html>
+          </html>
