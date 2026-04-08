@@ -3,81 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catch the Falling Items</title>
+    <title>Catch the Coins Game</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: #f0f0f0;
+            background: linear-gradient(to bottom, #87CEEB, #E0F6FF);
+            font-family: Arial, sans-serif;
         }
+        
         #game-container {
             position: relative;
             width: 100vw;
             height: 100vh;
             overflow: hidden;
         }
+        
+        #score-board {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            z-index: 100;
+        }
+        
         #basket {
             position: absolute;
-            bottom: 10px;
-            width: 100px;
-            height: 20px;
-            background-color: #ff6347;
-            left: 50%;
+            bottom: 30px;
+            width: 120px;
+            height: 40px;
+            background: linear-gradient(to bottom, #FF6347, #FF4500);
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
             transform: translateX(-50%);
         }
-        .item {
+        
+        .coin {
             position: absolute;
-            width: 30px;
-            height: 30px;
-            background-color: #4682b4;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle at 30% 30%, #FFD700, #FFA500);
             border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+        
+        .coin::before {
+            content: "₹";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            font-weight: bold;
+            color: #8B4513;
+        }
+        
+        #instructions {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #333;
         }
     </style>
 </head>
 <body>
     <div id="game-container">
+        <div id="score-board">Score: <span id="score">0</span></div>
         <div id="basket"></div>
+        <div id="instructions">Use ← → Arrow Keys to Move Basket</div>
     </div>
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const gameContainer = document.getElementById('game-container');
             const basket = document.getElementById('basket');
+            const scoreElement = document.getElementById('score');
+            
             const gameWidth = gameContainer.clientWidth;
-            const basketWidth = basket.clientWidth;
+            const gameHeight = gameContainer.clientHeight;
+            const basketWidth = basket.offsetWidth;
+            const basketHeight = basket.offsetHeight;
+            
+            let basketX = (gameWidth - basketWidth) / 2;
             let score = 0;
-            function createItem() {
-                const item = document.createElement('div');
-                item.classList.add('item');
-                item.style.left = Math.random() * (gameWidth - 30) + 'px';
-                item.style.top = '-30px';
-                gameContainer.appendChild(item);
-                function fall() {
-                    const itemTop = parseInt(item.style.top);
-                    if (itemTop < gameContainer.clientHeight) {
-                        item.style.top = itemTop + 2 + 'px';
-                        requestAnimationFrame(fall);
-                    } else {
-                        gameContainer.removeChild(item);
+            let coins = [];
+            let gameActive = true;
+            
+            basket.style.left = basketX + 'px';
+            
+            function createCoin() {
+                if (!gameActive) return;
+                
+                const coin = document.createElement('div');
+                coin.classList.add('coin');
+                
+                const coinSize = 40;
+                const coinX = Math.random() * (gameWidth - coinSize);
+                
+                coin.style.left = coinX + 'px';
+                coin.style.top = '-50px';
+                
+                gameContainer.appendChild(coin);
+                coins.push({
+                    element: coin,
+                    x: coinX,
+                    y: -50,
+                    speed: 2 + Math.random() * 2
+                });
+            }
+            
+            function updateCoins() {
+                if (!gameActive) return;
+                
+                for (let i = coins.length - 1; i >= 0; i--) {
+                    const coin = coins[i];
+                    coin.y += coin.speed;
+                    coin.element.style.top = coin.y + 'px';
+                    
+                    if (coin.y > gameHeight) {
+                        gameContainer.removeChild(coin.element);
+                        coins.splice(i, 1);
+                        continue;
+                    }
+                    
+                    if (checkCollision(coin)) {
+                        score += 10;
+                        scoreElement.textContent = score;
+                        gameContainer.removeChild(coin.element);
+                        coins.splice(i, 1);
                     }
                 }
-                fall();
+                
+                requestAnimationFrame(updateCoins);
             }
-            setInterval(createItem, 1000);
-            function moveBasket(event) {
+            
+            function checkCollision(coin) {
+                const coinRect = coin.element.getBoundingClientRect();
+                const basketRect = basket.getBoundingClientRect();
+                
+                return (
+                    coinRect.bottom >= basketRect.top &&
+                    coinRect.top <= basketRect.bottom &&
+                    coinRect.right >= basketRect.left &&
+                    coinRect.left <= basketRect.right
+                );
+            }
+            
+            function moveBasket(direction) {
+                if (!gameActive) return;
+                
+                if (direction === 'left' && basketX > 0) {
+                    basketX -= 15;
+                } else if (direction === 'right' && basketX < gameWidth - basketWidth) {
+                    basketX += 15;
+                }
+                
+                basket.style.left = basketX + 'px';
+            }
+            
+            document.addEventListener('keydown', (event) => {
                 if (event.key === 'ArrowLeft') {
-                    const basketLeft = parseInt(basket.style.left) || gameWidth / 2 - basketWidth / 2;
-                    if (basketLeft > 0) {
-                        basket.style.left = basketLeft - 10 + 'px';
-                    }
+                    moveBasket('left');
                 } else if (event.key === 'ArrowRight') {
-                    const basketLeft = parseInt(basket.style.left) || gameWidth / 2 - basketWidth / 2;
-                    if (basketLeft < gameWidth - basketWidth) {
-                        basket.style.left = basketLeft + 10 + 'px';
-                    }
+                    moveBasket('right');
                 }
-            }
-            document.addEventListener('keydown', moveBasket);
+            });
+            
+            setInterval(createCoin, 800);
+            updateCoins();
+            
+            setInterval(() => {
+                if (gameActive) {
+                    createCoin();
+                }
+            }, 800);
         });
     </script>
 </body>
